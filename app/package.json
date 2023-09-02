@@ -1,0 +1,19 @@
+{
+  "name": "openppp",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite build && vite preview"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "glob": "^9.3.2",
+    "postcss": "^8.4.21",
+    "postcss-import": "^15.1.0",
+    "prettier-plugin-tailwindcss": "^0.2.4",
+    "tailwindcss": "^3.2.7",
+    "vite": "^4.1.4",
+    "vite-plugin-pwa": "^0.14.4"
+  }
+}
