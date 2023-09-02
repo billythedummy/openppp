@@ -6,4 +6,27 @@
   h1 {
     @apply text-4xl;
   }
+
+  h2 {
+    @apply text-3xl;
+  }
+
+  a:hover {
+    @apply underline;
+  }
+}
+
+@layer components {
+  .icon-button {
+    @apply rounded-full;
+    @apply p-2;
+    @apply flex;
+    @apply items-center;
+    @apply justify-center;
+  }
+
+  .icon-button:not([disabled]):hover,
+  .icon-button:not([disabled]):active {
+    @apply bg-gray-100;
+  }
 }

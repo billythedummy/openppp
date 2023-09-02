@@ -10,9 +10,9 @@ An OpenPPP plugin is simply a user-defined ESModule that sets `window.openPPPHan
 
 The web app provides a minimal UI for users to take/upload a photo. Upon completion, the web app runs the user-specified OpenPPP plugin, and then calls `window.openPPPHandler(image)` where `image` is the captured photo.
 
-## Example Plugin
+## Example
 
-This example plugin simply POSTs the captured image data to a server as form data for further processing.
+This example OpenPPP plugin simply POSTs the captured image data to a server as form data for further processing.
 
 ```js
 window.openPPPHandler = async (image) => {

@@ -32,12 +32,6 @@ module.exports = {
       },
       rules: {
         "import/prefer-default-export": "off",
-        "no-restricted-imports": [
-          "error",
-          {
-            patterns: [".*"],
-          },
-        ],
         "no-restricted-syntax": [
           "error",
           {

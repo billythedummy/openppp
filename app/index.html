@@ -2,17 +2,12 @@
 <html lang="en">
   <head>
     <!-- <script type="module"> is always `defer` -->
-    <script type="module" src="/js/common/i18n.js"></script>
-    <script type="module" src="/js/index.js"></script>
+    <script type="module" src="/js/pages/index.js"></script>
 
     <link href="css/index.css" rel="stylesheet" />
 
     <!-- everything below here is required for PWA-->
-    <!-- default output of vite-plugin-pwa -->
-
-    <!-- TODO: for some reason everything but manifest.webmanifest -->
-    <!-- has the root prefix correctly set at build time -->
-    <link rel="manifest" href="/vite-vanilla-template/manifest.webmanifest" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     <!-- TODO: use actual theme colors from tailwind-->
     <meta name="theme-color" content="#FFFFFF" />
     <!-- generate all below logos using https://realfavicongenerator.net/ -->
@@ -36,11 +31,145 @@
       name="viewport"
       content="width=device-width, initial-scale=1, minimum-scale=1"
     />
-    <title data-i18n-key="title">My Web App</title>
+    <title>OpenPPP</title>
   </head>
-  <body class="flex flex-col items-center space-y-1 px-4 py-2">
-    <main class="flex w-full flex-col self-stretch">
-      <h1 class="space-y-1 self-center text-center">Hello World!</h1>
+  <body
+    class="m-auto flex h-screen max-w-screen-xl flex-col items-center space-y-1 px-4 py-2"
+  >
+    <header class="flex h-12 w-full items-center justify-between self-stretch">
+      <openppp-sidebar class="block h-full w-min"></openppp-sidebar>
+      <a href="/">
+        <h1 class="justify-self-center text-center">OpenPPP</h1>
+      </a>
+      <button class="icon-button h-[75%]">
+        <svg
+          class="h-full"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <title>help</title>
+          <g id="Warning / Help">
+            <path
+              id="Vector"
+              d="M8.19531 8.76498C8.42304 8.06326 8.84053 7.43829 9.40137 6.95899C9.96221 6.47968 10.6444 6.16501 11.373 6.0494C12.1017 5.9338 12.8486 6.02202 13.5303 6.3042C14.2119 6.58637 14.8016 7.05166 15.2354 7.64844C15.6691 8.24521 15.9295 8.95008 15.9875 9.68554C16.0455 10.421 15.8985 11.1581 15.5636 11.8154C15.2287 12.4728 14.7192 13.0251 14.0901 13.4106C13.4611 13.7961 12.7377 14.0002 12 14.0002V14.9998M12.0498 19V19.1L11.9502 19.1002V19H12.0498Z"
+              stroke="#000000"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </g>
+        </svg>
+        <!-- Vectors and icons by <a href="https://github.com/krystonschwarze/coolicons?ref=svgrepo.com" target="_blank">Krystonschwarze</a> in CC Attribution License via <a href="https://www.svgrepo.com/" target="_blank">SVG Repo</a> -->
+      </button>
+    </header>
+    <hr class="w-full" />
+    <main class="flex w-full grow flex-col self-stretch">
+      <!-- https://developer.apple.com/forums/thread/92713 must add autoPlay, playsInline, muted attribute to work on ios -->
+      <video class="h-full" autoplay playsinline muted></video>
     </main>
+    <hr class="w-full" />
+    <footer class="flex h-12 w-full justify-between self-stretch">
+      <!-- svgs inline to allow toggling of fill color-->
+      <button class="icon-button h-full" disabled>
+        <svg
+          class="h-full"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <title>or upload a photo</title>
+          <defs>
+            <linearGradient id="upload-photo-icon-fill">
+              <!-- gray-300 -->
+              <stop stop-color="rgb(209 213 219)"></stop>
+            </linearGradient>
+          </defs>
+          <path
+            d="M13 4H8.8C7.11984 4 6.27976 4 5.63803 4.32698C5.07354 4.6146 4.6146 5.07354 4.32698 5.63803C4 6.27976 4 7.11984 4 8.8V15.2C4 16.8802 4 17.7202 4.32698 18.362C4.6146 18.9265 5.07354 19.3854 5.63803 19.673C6.27976 20 7.11984 20 8.8 20H15.2C16.8802 20 17.7202 20 18.362 19.673C18.9265 19.3854 19.3854 18.9265 19.673 18.362C20 17.7202 20 16.8802 20 15.2V11"
+            stroke="url('#upload-photo-icon-fill')"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+          <path
+            d="M4 16L8.29289 11.7071C8.68342 11.3166 9.31658 11.3166 9.70711 11.7071L13 15M13 15L15.7929 12.2071C16.1834 11.8166 16.8166 11.8166 17.2071 12.2071L20 15M13 15L15.25 17.25"
+            stroke="url('#upload-photo-icon-fill')"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+          <path
+            d="M18 8V3M18 3L16 5M18 3L20 5"
+            stroke="url('#upload-photo-icon-fill')"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </svg>
+      </button>
+      <button class="icon-button h-full" disabled>
+        <svg
+          class="h-full"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <title>take the photo to process</title>
+          <defs>
+            <linearGradient id="camera-icon-fill">
+              <!-- gray-300 -->
+              <stop stop-color="rgb(209 213 219)"></stop>
+            </linearGradient>
+          </defs>
+          <path
+            d="M12 16C13.6569 16 15 14.6569 15 13C15 11.3431 13.6569 10 12 10C10.3431 10 9 11.3431 9 13C9 14.6569 10.3431 16 12 16Z"
+            stroke="url('#camera-icon-fill')"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+          <path
+            d="M3 16.8V9.2C3 8.0799 3 7.51984 3.21799 7.09202C3.40973 6.71569 3.71569 6.40973 4.09202 6.21799C4.51984 6 5.0799 6 6.2 6H7.25464C7.37758 6 7.43905 6 7.49576 5.9935C7.79166 5.95961 8.05705 5.79559 8.21969 5.54609C8.25086 5.49827 8.27836 5.44328 8.33333 5.33333C8.44329 5.11342 8.49827 5.00346 8.56062 4.90782C8.8859 4.40882 9.41668 4.08078 10.0085 4.01299C10.1219 4 10.2448 4 10.4907 4H13.5093C13.7552 4 13.8781 4 13.9915 4.01299C14.5833 4.08078 15.1141 4.40882 15.4394 4.90782C15.5017 5.00345 15.5567 5.11345 15.6667 5.33333C15.7216 5.44329 15.7491 5.49827 15.7803 5.54609C15.943 5.79559 16.2083 5.95961 16.5042 5.9935C16.561 6 16.6224 6 16.7454 6H17.8C18.9201 6 19.4802 6 19.908 6.21799C20.2843 6.40973 20.5903 6.71569 20.782 7.09202C21 7.51984 21 8.0799 21 9.2V16.8C21 17.9201 21 18.4802 20.782 18.908C20.5903 19.2843 20.2843 19.5903 19.908 19.782C19.4802 20 18.9201 20 17.8 20H6.2C5.0799 20 4.51984 20 4.09202 19.782C3.71569 19.5903 3.40973 19.2843 3.21799 18.908C3 18.4802 3 17.9201 3 16.8Z"
+            stroke="url('#camera-icon-fill')"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </svg>
+        <!-- Vectors and icons by <a href="https://dazzleui.gumroad.com/l/dazzleiconsfree?ref=svgrepo.com" target="_blank">Dazzle Ui</a> in CC Attribution License via <a href="https://www.svgrepo.com/" target="_blank">SVG Repo</a> -->
+      </button>
+      <button class="icon-button h-full">
+        <svg
+          class="block h-full"
+          viewBox="0 0 20 20"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <title>configure the OpenPPP plugin to use</title>
+          <g
+            id="Page-1"
+            stroke="none"
+            stroke-width="1"
+            fill="none"
+            fill-rule="evenodd"
+          >
+            <g
+              id="script-icon-fill"
+              transform="translate(-340.000000, -1879.000000)"
+              fill="#FF0000"
+            >
+              <g id="icons" transform="translate(56.000000, 160.000000)">
+                <path
+                  d="M297,1728 C297,1728.552 296.552,1729 296,1729 L292,1729 C291.448,1729 291,1728.552 291,1728 C291,1727.448 291.448,1727 292,1727 L296,1727 C296.552,1727 297,1727.448 297,1728 L297,1728 Z M292,1723 L296,1723 C296.552,1723 297,1723.448 297,1724 C297,1724.552 296.552,1725 296,1725 L292,1725 C291.448,1725 291,1724.552 291,1724 C291,1723.448 291.448,1723 292,1723 L292,1723 Z M300,1723 L300,1721 C301.103,1721 302,1721.897 302,1723 L300,1723 Z M298,1735 C298,1736.103 297.103,1737 296,1737 L296,1735 C296,1733.895 295.105,1733 294,1733 L290,1733 L290,1723 C290,1721.895 290.895,1721 292,1721 L298,1721 L298,1735 Z M294,1737 L288,1737 C286.897,1737 286,1736.103 286,1735 L293,1735 C293.552,1735 294,1735.448 294,1736 L294,1737 Z M300,1719 L292,1719 C289.791,1719 288,1720.791 288,1723 L288,1733 L285,1733 C284.448,1733 284,1733.448 284,1734 L284,1735 C284,1737.209 285.791,1739 288,1739 L296,1739 C298.209,1739 300,1737.209 300,1735 L300,1725 L303,1725 C303.552,1725 304,1724.552 304,1724 L304,1723 C304,1720.791 302.209,1719 300,1719 L300,1719 Z"
+                  id="script-[#1604]"
+                ></path>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </button>
+    </footer>
   </body>
 </html>
