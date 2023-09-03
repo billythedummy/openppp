@@ -15,7 +15,7 @@ module.exports = {
       extends: ["plugin:@html-eslint/recommended"],
     },
     {
-      files: "*.js",
+      files: "*.*js",
       plugins: ["simple-import-sort"],
       extends: ["airbnb-base", "prettier"],
       parserOptions: {
