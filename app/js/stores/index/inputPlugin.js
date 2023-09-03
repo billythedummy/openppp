@@ -22,6 +22,11 @@ export function unsetInputPlugin() {
   invokeOnChangeCbs(oldVal);
 }
 
+/** @returns {?import("../../types").InputPlugin} */
+export function getInputPlugin() {
+  return inputPlugin;
+}
+
 /**
  *
  * @param {OnInputPluginChangedCallback} cb

@@ -26,8 +26,7 @@ const SCRIPT_ICON_FILL = document.getElementById("script-icon-fill");
 const HELP_DIALOG = document.getElementById("help-dialog");
 
 async function startLiveVideoFeed() {
-  /** @type {HTMLVideoElement} */
-  // @ts-ignore
+  /** @type {HTMLVideoElement} */ // @ts-ignore
   const videoElement = document.querySelector("video");
   const stream = await window.navigator.mediaDevices.getUserMedia(
     VID_CONSTRAINTS
