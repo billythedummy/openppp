@@ -11,8 +11,42 @@
     @apply text-3xl;
   }
 
+  h3 {
+    @apply text-2xl;
+  }
+
   a:hover {
     @apply underline;
+  }
+
+  dialog {
+    @apply fixed;
+    @apply w-5/6;
+    /* fixed is positioned relative to viewport,
+     * so body's max-w-xl doesnt apply */
+    @apply max-w-lg;
+    @apply max-h-[83.3333%];
+    @apply overflow-auto;
+
+    /* centering */
+    /* @apply inset-1/2;
+    transform: translate(-50%, -50%); */
+    @apply self-center;
+    @apply m-auto;
+
+    @apply rounded-container;
+  }
+
+  [disabled],
+  [aria-disabled="true"] {
+    @apply disabled-text-color;
+  }
+
+  select,
+  input[type="text"],
+  textarea {
+    @apply rounded-container;
+    @apply p-1;
   }
 }
 
@@ -28,5 +62,40 @@
   .icon-button:not([disabled]):hover,
   .icon-button:not([disabled]):active {
     @apply bg-gray-100;
+  }
+
+  /* need additional container within dialog because
+   * you cant set display: property of dialog or it'll show
+   */
+  .dialog-container {
+    @apply w-full;
+    /* NB: DO NOT SET HEIGHT OR SAFARI IOS RENDERS THIS WITH NO HEIGHT */
+    /* @apply h-full; */
+
+    @apply flex;
+    @apply flex-col;
+    @apply gap-2;
+  }
+
+  .text-button {
+    @apply rounded-container;
+    @apply border-black;
+  }
+
+  .text-button:not([disabled]):hover,
+  .text-button:not([disabled]):active {
+    @apply bg-gray-100;
+  }
+}
+
+@layer utilities {
+  .rounded-container {
+    @apply rounded-md;
+    @apply border-gray-300;
+    @apply border-2;
+  }
+
+  .disabled-text-color {
+    @apply text-gray-300;
   }
 }

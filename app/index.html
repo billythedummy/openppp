@@ -41,7 +41,7 @@
       <a href="/">
         <h1 class="justify-self-center text-center">OpenPPP</h1>
       </a>
-      <button class="icon-button h-[75%]">
+      <button id="help-button" class="icon-button h-[75%]">
         <svg
           class="h-full"
           viewBox="0 0 24 24"
@@ -71,7 +71,7 @@
     <hr class="w-full" />
     <footer class="flex h-12 w-full justify-between self-stretch">
       <!-- svgs inline to allow toggling of fill color-->
-      <button class="icon-button h-full" disabled>
+      <button id="upload-photo-button" class="icon-button h-full" disabled>
         <svg
           class="h-full"
           viewBox="0 0 24 24"
@@ -108,7 +108,7 @@
           ></path>
         </svg>
       </button>
-      <button class="icon-button h-full" disabled>
+      <button id="take-photo-button" class="icon-button h-full" disabled>
         <svg
           class="h-full"
           viewBox="0 0 24 24"
@@ -139,7 +139,7 @@
         </svg>
         <!-- Vectors and icons by <a href="https://dazzleui.gumroad.com/l/dazzleiconsfree?ref=svgrepo.com" target="_blank">Dazzle Ui</a> in CC Attribution License via <a href="https://www.svgrepo.com/" target="_blank">SVG Repo</a> -->
       </button>
-      <button class="icon-button h-full">
+      <button id="configure-plugin-button" class="icon-button h-full">
         <svg
           class="block h-full"
           viewBox="0 0 20 20"
@@ -171,5 +171,73 @@
         </svg>
       </button>
     </footer>
+    <dialog id="plugin-dialog">
+      <section class="dialog-container">
+        <header class="flex items-center">
+          <h3 class="flex-1">Configure Plugin</h3>
+          <button aria-label="close" type="button" class="icon-button">
+            x
+          </button>
+        </header>
+        <label class="block" aria-disabled="true">
+          <input
+            id="saved-plugin-radio"
+            type="radio"
+            name="plugin-type"
+            disabled
+          />
+          Select a saved plugin
+        </label>
+        <select disabled>
+          <option selected>coming soon</option>
+        </select>
+        <hr />
+        <label class="block" aria-disabled="true">
+          <input
+            id="import-plugin-radio"
+            type="radio"
+            name="plugin-type"
+            disabled
+          />
+          Import from URL
+        </label>
+        <input type="text" placeholder="coming soon" disabled />
+        <hr />
+        <label class="block">
+          <input
+            id="paste-plugin-radio"
+            type="radio"
+            name="plugin-type"
+            checked
+          />
+          Paste a module
+        </label>
+        <textarea rows="10" class="w-full"></textarea>
+        <button aria-label="save" type="button" class="text-button">
+          save
+        </button>
+      </section>
+    </dialog>
+    <dialog id="help-dialog">
+      <section class="dialog-container">
+        <header class="flex items-center">
+          <h3 class="flex-1">How to use</h3>
+          <button aria-label="close" type="button" class="icon-button">
+            x
+          </button>
+        </header>
+        <ol class="ml-4 list-outside list-decimal">
+          <li>
+            Configure the plugin to run using the script button on the bottom
+            right
+          </li>
+          <li>
+            Take a photo using the camera button or upload a photo using the
+            upload button on the bottom left
+          </li>
+          <li>The plugin will run on the captured photo</li>
+        </ol>
+      </section>
+    </dialog>
   </body>
 </html>
