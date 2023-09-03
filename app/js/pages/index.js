@@ -66,8 +66,10 @@ function setupConfigurePluginBtn() {
   };
   onInputPluginChanged((_, newVal) => {
     if (newVal === null) {
+      // red
       SCRIPT_ICON_FILL.setAttribute("fill", "#FF0000");
     } else {
+      // green
       SCRIPT_ICON_FILL.setAttribute("fill", "#00FF00");
     }
   });
@@ -84,7 +86,10 @@ restartLiveVideoFeed();
 setupTakePhotoBtn();
 setupUploadPhotoBtn();
 setupConfigurePluginBtn();
-setupPluginDialog();
 setupHelpBtn();
 setupHelpDialog();
 setupToggleCameraButton();
+
+// must be last since load() might
+// setInputPlugin() so other listeners should be registered prior
+setupPluginDialog();
