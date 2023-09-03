@@ -65,6 +65,17 @@
     </header>
     <hr class="w-full" />
     <main class="flex w-full grow flex-col self-stretch">
+      <button
+        id="toggle-camera-button"
+        type="button"
+        class="icon-button absolute h-12 self-end"
+      >
+        <img
+          class="h-full"
+          src="/images/icons/camera-flip.svg"
+          alt="toggle camera"
+        />
+      </button>
       <!-- https://developer.apple.com/forums/thread/92713 must add autoPlay, playsInline, muted attribute to work on ios -->
       <video class="h-full" autoplay playsinline muted></video>
     </main>

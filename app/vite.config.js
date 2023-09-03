@@ -35,12 +35,6 @@ export default defineConfig({
       ),
     },
   },
-  resolve: {
-    alias: [
-      // to allow `import a from "@/js/a"` to work in prod
-      { find: "@", replacement: __dirname },
-    ],
-  },
   plugins: [
     VitePWA({
       includeAssets: [`/favicon.ico`, `/images/logo/apple-touch-icon.png`],

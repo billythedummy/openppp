@@ -10,11 +10,16 @@ import { setupDialog } from "../utils/dialog";
 
 /** @type {MediaStreamConstraints} */
 const VID_CONSTRAINTS = {
-  video: true,
+  video: {
+    facingMode: "user",
+  },
 };
 
 /** @type {HTMLButtonElement} */ // @ts-ignore
 const HELP_BTN = document.getElementById("help-button");
+
+/** @type {HTMLButtonElement} */ // @ts-ignore
+const TOGGLE_CAMERA_BTN = document.getElementById("toggle-camera-button");
 
 /** @type {HTMLButtonElement} */ // @ts-ignore
 const CONFIGURE_PLUGIN_BTN = document.getElementById("configure-plugin-button");
@@ -25,13 +30,23 @@ const SCRIPT_ICON_FILL = document.getElementById("script-icon-fill");
 /** @type {HTMLDialogElement} */ // @ts-ignore
 const HELP_DIALOG = document.getElementById("help-dialog");
 
-async function startLiveVideoFeed() {
-  /** @type {HTMLVideoElement} */ // @ts-ignore
-  const videoElement = document.querySelector("video");
+/** @type {HTMLVideoElement} */ // @ts-ignore
+const VIDEO_ELEM = document.querySelector("video");
+
+function toggleCamera() {
+  const newFacingMode =
+    // @ts-ignore
+    VID_CONSTRAINTS.video.facingMode === "user" ? "environment" : "user";
+  // @ts-ignore
+  VID_CONSTRAINTS.video.facingMode = newFacingMode;
+  restartLiveVideoFeed();
+}
+
+async function restartLiveVideoFeed() {
   const stream = await window.navigator.mediaDevices.getUserMedia(
     VID_CONSTRAINTS
   );
-  videoElement.srcObject = stream;
+  VIDEO_ELEM.srcObject = stream;
 }
 
 function setupHelpBtn() {
@@ -44,6 +59,7 @@ function setupHelpDialog() {
   setupDialog(HELP_DIALOG);
 }
 
+// aesthetics and showModal only
 function setupConfigurePluginBtn() {
   CONFIGURE_PLUGIN_BTN.onclick = () => {
     PLUGIN_DIALOG.showModal();
@@ -57,13 +73,18 @@ function setupConfigurePluginBtn() {
   });
 }
 
+function setupToggleCameraButton() {
+  TOGGLE_CAMERA_BTN.onclick = toggleCamera;
+}
+
 // on page parsed:
 
 defineOpenpppSidebar();
-startLiveVideoFeed();
+restartLiveVideoFeed();
 setupTakePhotoBtn();
 setupUploadPhotoBtn();
 setupConfigurePluginBtn();
 setupPluginDialog();
 setupHelpBtn();
 setupHelpDialog();
+setupToggleCameraButton();
