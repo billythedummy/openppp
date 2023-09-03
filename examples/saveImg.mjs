@@ -18,3 +18,4 @@ async function saveImg(image) {
 
 // @ts-ignore
 window.openPPPHandler = saveImg;
+window.dispatchEvent(new CustomEvent("openppp:handler-ready"));

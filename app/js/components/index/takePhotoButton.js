@@ -1,4 +1,5 @@
-import { runInputPlugin, setGlobalImgFile } from "../../core";
+import { runInputPlugin } from "../../core";
+import { setImgFile } from "../../stores/index/imgFile";
 import {
   getInputPlugin,
   onInputPluginChanged,
@@ -31,7 +32,7 @@ function takePhotoRunPlugin() {
       throw new Error("canvas.toBlob() failed");
     }
     const imgFile = new File([blob], `capture-${Date.now()}.png`);
-    setGlobalImgFile(imgFile);
+    setImgFile(imgFile);
     const inputPlugin = getInputPlugin();
     if (!inputPlugin) {
       throw new Error("No plugin defined");

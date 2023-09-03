@@ -1,7 +1,8 @@
+import { getImgFile, unsetImgFile } from "./stores/index/imgFile";
 import { createModuleScriptTag } from "./utils/dom";
 
 const HANDLER_MODULE_SCRIPT_ID = "openppphandlermodulescript";
-const EXEC_MODULE_SCRIPT_ID = "openpppexecmodulescript";
+const HANDLER_READY_EVENT_NAME = "openppp:handler-ready";
 
 /**
  *
@@ -14,39 +15,32 @@ export function runInputPlugin(inputPlugin) {
   } else {
     handlerModule.innerHTML = inputPlugin.val;
   }
-  document.body.appendChild(handlerModule);
 
-  const execModule = createModuleScriptTag(EXEC_MODULE_SCRIPT_ID);
-  execModule.innerHTML = `
-    async function run() {
-      const imgFile = window.openPPPFile;
+  const run = async () => {
+    try {
+      // @ts-ignore
+      const imgFile = getImgFile();
       if (!imgFile) {
-        throw new Error("window.openPPPFile undefined");
+        throw new Error("imgFile undefined");
       }
+      // @ts-ignore
       const handler = window.openPPPHandler;
       if (!handler) {
         throw new Error("window.openPPPHandler undefined");
       }
 
       await handler(imgFile);
-
+    } finally {
+      unsetImgFile();
+      window.removeEventListener(HANDLER_READY_EVENT_NAME, run);
+      // @ts-ignore
       window.openPPPFile = undefined;
+      // @ts-ignore
       window.openPPPHandler = undefined;
+      document.body.removeChild(handlerModule);
     }
+  };
 
-    run().finally(() => {
-      document.body.removeChild(document.getElementById("${HANDLER_MODULE_SCRIPT_ID}"));
-      document.body.removeChild(document.getElementById("${EXEC_MODULE_SCRIPT_ID}"));
-    });
-  `;
-  document.body.appendChild(execModule);
-}
-
-/**
- *
- * @param {File} imgFile
- */
-export function setGlobalImgFile(imgFile) {
-  // @ts-ignore
-  window.openPPPFile = imgFile;
+  window.addEventListener(HANDLER_READY_EVENT_NAME, run);
+  document.body.appendChild(handlerModule);
 }

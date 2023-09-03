@@ -9,3 +9,4 @@ async function consoleLog(image) {
 
 // @ts-ignore
 window.openPPPHandler = consoleLog;
+window.dispatchEvent(new CustomEvent("openppp:handler-ready"));

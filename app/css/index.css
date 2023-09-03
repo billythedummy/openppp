@@ -57,11 +57,10 @@
     @apply flex;
     @apply items-center;
     @apply justify-center;
-  }
-
-  .icon-button:not([disabled]):hover,
-  .icon-button:not([disabled]):active {
-    @apply bg-gray-100;
+    @apply enabled:cursor-pointer;
+    @apply disabled:cursor-auto;
+    @apply enabled:hover:bg-gray-100;
+    @apply enabled:active:bg-gray-100;
   }
 
   /* need additional container within dialog because
