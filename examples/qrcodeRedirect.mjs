@@ -21,6 +21,6 @@ async function qrcodeRedirect(image) {
   }
 }
 
-// @ts-ignore
-window.openPPPHandler = qrcodeRedirect;
-window.dispatchEvent(new CustomEvent("openppp:handler-ready"));
+window.dispatchEvent(
+  new CustomEvent("openppp:handler-ready", { detail: qrcodeRedirect })
+);

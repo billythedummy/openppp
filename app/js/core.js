@@ -16,27 +16,19 @@ export function runInputPlugin(inputPlugin) {
     handlerModule.innerHTML = inputPlugin.val;
   }
 
-  const run = async () => {
+  /** @type {EventListener} */
+  const run = async (event) => {
     try {
-      // @ts-ignore
+      /** @type {OpenPPPHandlerReadyEvent} */ // @ts-ignore
+      const { detail } = event;
       const imgFile = getImgFile();
       if (!imgFile) {
         throw new Error("imgFile undefined");
       }
-      // @ts-ignore
-      const handler = window.openPPPHandler;
-      if (!handler) {
-        throw new Error("window.openPPPHandler undefined");
-      }
-
-      await handler(imgFile);
+      await detail(imgFile);
     } finally {
       unsetImgFile();
       window.removeEventListener(HANDLER_READY_EVENT_NAME, run);
-      // @ts-ignore
-      window.openPPPFile = undefined;
-      // @ts-ignore
-      window.openPPPHandler = undefined;
       document.body.removeChild(handlerModule);
     }
   };

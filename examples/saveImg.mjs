@@ -16,6 +16,6 @@ async function saveImg(image) {
   document.body.removeChild(aElem);
 }
 
-// @ts-ignore
-window.openPPPHandler = saveImg;
-window.dispatchEvent(new CustomEvent("openppp:handler-ready"));
+window.dispatchEvent(
+  new CustomEvent("openppp:handler-ready", { detail: saveImg })
+);
