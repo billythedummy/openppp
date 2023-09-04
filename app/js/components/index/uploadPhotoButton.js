@@ -7,6 +7,7 @@ import {
 import { BLACK_RGB, GRAY_300_RGB } from "../../utils/consts";
 import { toggleBtnEnabledOnInputPluginChanged } from "../../utils/inputPlugin";
 import { setStopColor } from "../../utils/svg";
+import { drawAndShowPreview } from "./preview";
 
 /** @type {HTMLButtonElement} */ // @ts-ignore
 const UPLOAD_PHOTO_BTN = document.getElementById("upload-photo-button");
@@ -46,6 +47,7 @@ function onFileInputClosedHandler(fileInput) {
     if (!inputPlugin) {
       throw new Error("No plugin defined");
     }
+    drawAndShowPreview(imgFile);
     runInputPlugin(inputPlugin);
   };
   return closure;

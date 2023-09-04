@@ -64,7 +64,9 @@
       </button>
     </header>
     <hr class="w-full" />
-    <main class="flex w-full flex-1 flex-col self-stretch overflow-hidden">
+    <main
+      class="relative flex w-full flex-1 flex-col self-stretch overflow-hidden"
+    >
       <button
         id="toggle-camera-button"
         type="button"
@@ -75,6 +77,18 @@
           src="/images/icons/camera-flip.svg"
           alt="toggle camera"
         />
+      </button>
+      <canvas
+        id="preview-canvas"
+        class="invisible absolute h-full w-full"
+      ></canvas>
+      <button
+        id="close-preview-button"
+        class="icon-button invisible absolute absolute h-12 self-end"
+        type="button"
+        aria-label="close"
+      >
+        X
       </button>
       <!-- https://developer.apple.com/forums/thread/92713 must add autoPlay, playsInline, muted attribute to work on ios -->
       <video

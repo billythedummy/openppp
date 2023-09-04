@@ -3,6 +3,7 @@ import {
   PLUGIN_DIALOG,
   setupPluginDialog,
 } from "../components/index/pluginDialog";
+import { setupClosePreviewButton } from "../components/index/preview";
 import { setupTakePhotoBtn } from "../components/index/takePhotoButton";
 import { setupUploadPhotoBtn } from "../components/index/uploadPhotoButton";
 import { onInputPluginChanged } from "../stores/index/inputPlugin";
@@ -89,6 +90,7 @@ setupConfigurePluginBtn();
 setupHelpBtn();
 setupHelpDialog();
 setupToggleCameraButton();
+setupClosePreviewButton();
 
 // must be last since load() might
 // setInputPlugin() so other listeners should be registered prior
