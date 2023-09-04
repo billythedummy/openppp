@@ -64,7 +64,7 @@
       </button>
     </header>
     <hr class="w-full" />
-    <main class="flex w-full grow flex-col self-stretch">
+    <main class="flex w-full flex-1 flex-col self-stretch overflow-hidden">
       <button
         id="toggle-camera-button"
         type="button"
@@ -77,7 +77,12 @@
         />
       </button>
       <!-- https://developer.apple.com/forums/thread/92713 must add autoPlay, playsInline, muted attribute to work on ios -->
-      <video class="h-full" autoplay playsinline muted></video>
+      <video
+        class="h-auto min-h-full min-w-full"
+        autoplay
+        playsinline
+        muted
+      ></video>
     </main>
     <hr class="w-full" />
     <footer class="flex h-12 w-full justify-between self-stretch">
