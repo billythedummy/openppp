@@ -10,7 +10,7 @@ Open Picture Processing Plugins (OpenPPP) is a simple PWA and its accompanying s
 An OpenPPP plugin is simply a user-defined ESModule that dispatches a `CustomEvent` with type `openppp:handler-ready` to `window` with `event.detail` set to a image processing function with the following signature:
 
 ```js
-(image: File) => Promise<void>;
+(image: File) => Promise<void>
 ```
 
 The web app provides a minimal UI for users to take/upload a photo.
@@ -19,8 +19,8 @@ After the user takes/uploads a photo with the UI,
 
 1. the web app registers a `openppp:handler-ready` event listener on `window` that calls `event.detail(photo)` with the captured photo
 2. the provided plugin runs via an injected module script, emitting the `openppp:handler-ready` event with `event.detail` set to its processing function
-3. the processing function in `event.detail` runs on the captured photo
-4. upon completion, the event listeners are unset to cleanup for the next run
+3. the event listener set in 1. fires and runs the processing function in `event.detail` on the captured photo
+4. upon completion, the event listeners are unset to clean up for the next run
 
 ## Example
 

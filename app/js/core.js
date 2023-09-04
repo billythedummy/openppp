@@ -4,11 +4,33 @@ import { createModuleScriptTag } from "./utils/dom";
 const HANDLER_MODULE_SCRIPT_ID = "openppphandlermodulescript";
 const HANDLER_READY_EVENT_NAME = "openppp:handler-ready";
 
+/** @type {Set<EventListener>} */
+const HANDLER_READY_EVENT_LISTENERS = new Set();
+
+/**
+ *
+ * @param {EventListener} listener
+ */
+function addHandlerReadyEventListener(listener) {
+  window.addEventListener(HANDLER_READY_EVENT_NAME, listener);
+  HANDLER_READY_EVENT_LISTENERS.add(listener);
+}
+
+function clearHandlerReadyEventListeners() {
+  for (const listener of HANDLER_READY_EVENT_LISTENERS) {
+    window.removeEventListener(HANDLER_READY_EVENT_NAME, listener);
+  }
+  HANDLER_READY_EVENT_LISTENERS.clear();
+}
+
 /**
  *
  * @param {import("./types").InputPlugin} inputPlugin
  */
 export function runInputPlugin(inputPlugin) {
+  // cleanup any previous listeners that might not've cleaned up due to throws
+  clearHandlerReadyEventListeners();
+
   const handlerModule = createModuleScriptTag(HANDLER_MODULE_SCRIPT_ID);
   if (inputPlugin.ty === "url") {
     handlerModule.src = inputPlugin.val;
@@ -28,11 +50,12 @@ export function runInputPlugin(inputPlugin) {
       await detail(imgFile);
     } finally {
       unsetImgFile();
-      window.removeEventListener(HANDLER_READY_EVENT_NAME, run);
+      clearHandlerReadyEventListeners();
       document.body.removeChild(handlerModule);
     }
   };
 
-  window.addEventListener(HANDLER_READY_EVENT_NAME, run);
+  addHandlerReadyEventListener(run);
+
   document.body.appendChild(handlerModule);
 }
