@@ -4,6 +4,10 @@ const CLOSE_PREVIEW_BTN = document.getElementById("close-preview-button");
 /** @type {HTMLCanvasElement} */ // @ts-ignore
 const PREVIEW_CANVAS = document.getElementById("preview-canvas");
 
+export const PREVIEW_HIDDEN_EVENT_TYPE = "openppp-app:preview-hidden";
+
+export const PREVIEW_SHOWN_EVENT_TYPE = "openppp-app:preview-shown";
+
 /**
  *
  * @param {Blob} imgBlob
@@ -20,16 +24,34 @@ export async function drawAndShowPreview(imgBlob) {
   showPreview();
 }
 
+export function setupClosePreviewButton() {
+  CLOSE_PREVIEW_BTN.onclick = hidePreview;
+}
+
+/**
+ * TODO: save callbacks and add onPreviewShown() if required
+ * @param {() => void} callback
+ */
+export function onPreviewShown(callback) {
+  PREVIEW_CANVAS.addEventListener(PREVIEW_SHOWN_EVENT_TYPE, callback);
+}
+
+/**
+ * TODO: save callbacks and add onPreviewShown() if required
+ * @param {() => void} callback
+ */
+export function onPreviewHidden(callback) {
+  PREVIEW_CANVAS.addEventListener(PREVIEW_HIDDEN_EVENT_TYPE, callback);
+}
+
 function showPreview() {
   PREVIEW_CANVAS.classList.remove("invisible");
   CLOSE_PREVIEW_BTN.classList.remove("invisible");
+  PREVIEW_CANVAS.dispatchEvent(new CustomEvent(PREVIEW_SHOWN_EVENT_TYPE));
 }
 
 function hidePreview() {
   PREVIEW_CANVAS.classList.add("invisible");
   CLOSE_PREVIEW_BTN.classList.add("invisible");
-}
-
-export function setupClosePreviewButton() {
-  CLOSE_PREVIEW_BTN.onclick = hidePreview;
+  PREVIEW_CANVAS.dispatchEvent(new CustomEvent(PREVIEW_HIDDEN_EVENT_TYPE));
 }

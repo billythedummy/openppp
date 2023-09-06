@@ -3,7 +3,11 @@ import {
   PLUGIN_DIALOG,
   setupPluginDialog,
 } from "../components/index/pluginDialog";
-import { setupClosePreviewButton } from "../components/index/preview";
+import {
+  onPreviewHidden,
+  onPreviewShown,
+  setupClosePreviewButton,
+} from "../components/index/preview";
 import { setupTakePhotoBtn } from "../components/index/takePhotoButton";
 import { setupUploadPhotoBtn } from "../components/index/uploadPhotoButton";
 import { onInputPluginChanged } from "../stores/index/inputPlugin";
@@ -41,6 +45,18 @@ function toggleCamera() {
   // @ts-ignore
   VID_CONSTRAINTS.video.facingMode = newFacingMode;
   restartLiveVideoFeed();
+}
+
+function pauseLiveFeed() {
+  const s = VIDEO_ELEM.srcObject;
+  if (!s) {
+    return;
+  }
+  /** @type {MediaStream} */ // @ts-ignore
+  const stream = s;
+  const videoTrack = stream.getVideoTracks()[0];
+  videoTrack.stop();
+  stream.removeTrack(videoTrack);
 }
 
 async function restartLiveVideoFeed() {
@@ -91,6 +107,9 @@ setupHelpBtn();
 setupHelpDialog();
 setupToggleCameraButton();
 setupClosePreviewButton();
+
+onPreviewShown(pauseLiveFeed);
+onPreviewHidden(restartLiveVideoFeed);
 
 // must be last since load() might
 // setInputPlugin() so other listeners should be registered prior
