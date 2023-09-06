@@ -14,7 +14,8 @@
     "prettier-plugin-tailwindcss": "^0.2.4",
     "tailwindcss": "^3.2.7",
     "vite": "^4.1.4",
-    "vite-plugin-pwa": "^0.14.4"
+    "vite-plugin-pwa": "^0.14.4",
+    "workbox-window": "^6.5.4"
   },
   "dependencies": {
     "msc-sidebar": "^1.0.2"
