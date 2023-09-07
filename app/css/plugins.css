@@ -1,0 +1,7 @@
+@tailwind components;
+
+@layer components {
+  #plugin-list > li {
+    @apply w-full;
+  }
+}
