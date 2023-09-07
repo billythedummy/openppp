@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script type="module" src="/js/utils/updateSwPrompt.js"></script>
+    <script type="module" src="/js/components/common/sidebar.js"></script>
+    <script
+      type="module"
+      src="/js/components/plugins/pluginDetails.js"
+    ></script>
+    <script type="module" src="/js/components/plugins/pluginList.js"></script>
+
+    <link href="css/index.css" rel="stylesheet" />
+    <link href="css/plugins.css" rel="stylesheet" />
+
+    <!-- everything below here is required for PWA-->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <!-- TODO: use actual theme colors from tailwind-->
+    <meta name="theme-color" content="#FFFFFF" />
+    <!-- generate all below logos using https://realfavicongenerator.net/ -->
+    <!-- see: https://vite-pwa-org.netlify.app/guide/pwa-minimal-requirements.html -->
+    <link rel="icon" href="/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      href="/images/logo/apple-touch-icon.png"
+      sizes="180x180"
+    />
+    <link
+      rel="mask-icon"
+      href="/images/logo/logo_512x512.png"
+      color="#FFFFFF"
+    />
+    <meta name="description" content="This is a test web app" />
+    <meta name="msapplication-TileColor" content="#000000" />
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png" />
+    <!-- needed for media queries -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1"
+    />
+    <title>OpenPPP - Saved Plugins</title>
+  </head>
+  <body
+    class="m-auto flex max-w-screen-xl flex-col items-center space-y-1 overflow-y-scroll px-4 py-2"
+  >
+    <header class="flex h-12 w-full items-center justify-between self-stretch">
+      <openppp-sidebar class="block h-full w-min"></openppp-sidebar>
+      <h1 class="text-center">Saved Plugins</h1>
+      <div>
+        <!--for positioning-->
+      </div>
+    </header>
+    <hr class="w-full" />
+    <main class="flex w-full flex-1 flex-col self-stretch">
+      <plugin-details class="mb-6"></plugin-details>
+      <h3>Saved Plugins:</h3>
+      <ol id="plugin-list" class="flex flex-col gap-y-2"></ol>
+    </main>
+  </body>
+</html>

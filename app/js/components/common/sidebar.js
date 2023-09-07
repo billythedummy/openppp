@@ -15,7 +15,7 @@ const INNER_HTML = `
       <a href="/"><h2 class="pr-10">OpenPPP</h2></a>
       <hr/>
       <ul>
-        <li>Coming soon</li>
+        <li><a href="/plugins.html">Saved Plugins</a></li>
       </ul>
     </nav>
   </msc-sidebar>
@@ -39,6 +39,4 @@ class OpenpppSidebar extends HTMLElement {
   }
 }
 
-export function defineOpenpppSidebar() {
-  window.customElements.define("openppp-sidebar", OpenpppSidebar);
-}
+window.customElements.define("openppp-sidebar", OpenpppSidebar);

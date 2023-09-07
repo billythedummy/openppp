@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- <script type="module"> is always `defer` -->
-    <script type="module" src="/js/pages/index.js"></script>
     <script type="module" src="/js/utils/updateSwPrompt.js"></script>
+    <script type="module" src="/js/components/common/sidebar.js"></script>
+    <script type="module" src="/js/pages/index.js"></script>
 
     <link href="css/index.css" rel="stylesheet" />
 
@@ -40,7 +40,7 @@
     <header class="flex h-12 w-full items-center justify-between self-stretch">
       <openppp-sidebar class="block h-full w-min"></openppp-sidebar>
       <a href="/">
-        <h1 class="justify-self-center text-center">OpenPPP</h1>
+        <h1 class="text-center">OpenPPP</h1>
       </a>
       <button id="help-button" class="icon-button h-[75%]">
         <svg
@@ -210,18 +210,11 @@
             x
           </button>
         </header>
-        <label class="block" aria-disabled="true">
-          <input
-            id="saved-plugin-radio"
-            type="radio"
-            name="plugin-type"
-            disabled
-          />
+        <label class="block">
+          <input id="saved-plugin-radio" type="radio" name="plugin-type" />
           Select a saved plugin
         </label>
-        <select id="saved-plugin-select" disabled>
-          <option selected>coming soon</option>
-        </select>
+        <select id="saved-plugin-select"></select>
         <hr />
         <label class="block">
           <input id="import-plugin-radio" type="radio" name="plugin-type" />

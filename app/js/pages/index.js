@@ -1,4 +1,3 @@
-import { defineOpenpppSidebar } from "../components/common/sidebar";
 import {
   PLUGIN_DIALOG,
   setupPluginDialog,
@@ -98,7 +97,6 @@ function setupToggleCameraButton() {
 
 // on page parsed:
 
-defineOpenpppSidebar();
 restartLiveVideoFeed();
 setupTakePhotoBtn();
 setupUploadPhotoBtn();
