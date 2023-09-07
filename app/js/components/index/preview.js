@@ -29,7 +29,7 @@ export function setupClosePreviewButton() {
 }
 
 /**
- * TODO: save callbacks and add onPreviewShown() if required
+ * TODO: save callbacks and add offPreviewShown() if required
  * @param {() => void} callback
  */
 export function onPreviewShown(callback) {
@@ -37,7 +37,7 @@ export function onPreviewShown(callback) {
 }
 
 /**
- * TODO: save callbacks and add onPreviewShown() if required
+ * TODO: save callbacks and add offPreviewShown() if required
  * @param {() => void} callback
  */
 export function onPreviewHidden(callback) {

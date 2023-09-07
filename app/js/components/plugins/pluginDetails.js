@@ -57,6 +57,12 @@ export class PluginDetails extends HTMLElement {
     return this.querySelector("input");
   }
 
+  /** @returns {HTMLDetailsElement} */
+  get #details() {
+    // @ts-ignore
+    return this.querySelector("details");
+  }
+
   /** @returns {HTMLElement} */
   get #summary() {
     // @ts-ignore
@@ -120,7 +126,10 @@ export class PluginDetails extends HTMLElement {
       const savedPlugin = loadSavedPlugin(this.originalName);
       this.#textarea.value = savedPlugin;
 
-      this.#saveButton.onclick = () => updatePlugin(this);
+      this.#saveButton.onclick = () => {
+        updatePlugin(this);
+        this.#details.open = false;
+      };
       this.#deleteButton.onclick = () => {
         if (window.confirm("Delete plugin?")) {
           deleteSavedPlugin(this.originalName);

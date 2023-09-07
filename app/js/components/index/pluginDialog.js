@@ -13,6 +13,15 @@ import {
   saveLastSelectedPluginSrc,
 } from "../../storage/lastSelectedPluginSrc";
 import {
+  clearLastSelectedSavedPlugin,
+  loadLastSelectedSavedPlugin,
+  saveLastSelectedSavedPlugin,
+} from "../../storage/lastSelectedSavedPlugin";
+import {
+  loadAllSavedPluginNames,
+  loadSavedPlugin,
+} from "../../storage/savedPlugin";
+import {
   setInputPlugin,
   unsetInputPlugin,
 } from "../../stores/index/inputPlugin";
@@ -55,32 +64,56 @@ const INPUTS = {
   import: IMPORT_PLUGIN_INPUT,
 };
 
-/** @type {Record<import("../../storage/lastSelectedPluginSrc").SelectedPluginSrc, (pluginVal: string) => void>} */
+/** @type {Record<import("../../storage/lastSelectedPluginSrc").SelectedPluginSrc, (pluginVal: string, inputVal: string) => void>} */
 const SAVES = {
-  // TODO
-  save: () => {},
+  save: (_, inputVal) => {
+    saveLastSelectedSavedPlugin(inputVal);
+  },
   paste: saveLastPastedPlugin,
   import: saveLastImportedPlugin,
 };
 
-/** @type {Record<import("../../storage/lastSelectedPluginSrc").SelectedPluginSrc, () => ?string>} */
+/** @type {Record<import("../../storage/lastSelectedPluginSrc").SelectedPluginSrc, () => void>} */
 const LOADS = {
-  // TODO
-  save: () => null,
-  paste: loadLastPastedPlugin,
-  import: loadLastImportedPlugin,
+  save: () => {
+    const lastSelectedSavedPluginName = loadLastSelectedSavedPlugin();
+    const allPluginNames = loadAllSavedPluginNames();
+    for (const pluginName of allPluginNames) {
+      const option = document.createElement("option");
+      option.value = pluginName;
+      option.innerText = pluginName;
+      if (lastSelectedSavedPluginName === pluginName) {
+        option.selected = true;
+      }
+
+      SAVED_PLUGIN_SELECT.appendChild(option);
+    }
+  },
+  paste: () => {
+    const loaded = loadLastPastedPlugin();
+    if (loaded) {
+      INPUTS.paste.value = loaded;
+    }
+  },
+  import: () => {
+    const loaded = loadLastImportedPlugin();
+    if (loaded) {
+      INPUTS.import.value = loaded;
+    }
+  },
 };
 
 /** @type {Record<import("../../storage/lastSelectedPluginSrc").SelectedPluginSrc, () => void>} */
 const CLEARS = {
-  // TODO
-  save: () => {},
+  save: clearLastSelectedSavedPlugin,
   paste: clearLastPastedPlugin,
   import: clearLastImportedPlugin,
 };
 
 // update and save config on dialog close
 function update() {
+  /** @type {string} */
+  let inputVal;
   /** @type {import("../../storage/lastSelectedPluginSrc").SelectedPluginSrc} */
   let selectedPluginSrc = "save";
   /** @type {?import("../../types").InputPlugin} */
@@ -89,6 +122,7 @@ function update() {
   if (PASTE_PLUGIN_RADIO.checked) {
     selectedPluginSrc = "paste";
     const val = PASTE_PLUGIN_TEXTAREA.value;
+    inputVal = val;
     if (val) {
       inputPlugin = {
         ty: "rawString",
@@ -98,20 +132,30 @@ function update() {
   } else if (IMPORT_PLUGIN_RADIO.checked) {
     selectedPluginSrc = "import";
     const val = IMPORT_PLUGIN_INPUT.value;
+    inputVal = val;
     if (val) {
       inputPlugin = {
         ty: "url",
         val,
       };
     }
+  } else {
+    selectedPluginSrc = "save";
+    const pluginName = SAVED_PLUGIN_SELECT.value;
+    inputVal = pluginName;
+    if (pluginName) {
+      inputPlugin = {
+        ty: "rawString",
+        val: loadSavedPlugin(pluginName),
+      };
+    }
   }
-  // TODO: saved radio
 
   saveLastSelectedPluginSrc(selectedPluginSrc);
   if (inputPlugin) {
     setInputPlugin(inputPlugin);
     const saveFn = SAVES[selectedPluginSrc];
-    saveFn(inputPlugin.val);
+    saveFn(inputPlugin.val, inputVal);
   } else {
     unsetInputPlugin();
     const clearFn = CLEARS[selectedPluginSrc];
@@ -125,10 +169,7 @@ function load() {
     const src = uncasted;
 
     const loadFn = LOADS[src];
-    const loadedVal = loadFn();
-    if (loadedVal) {
-      INPUTS[src].value = loadedVal;
-    }
+    loadFn();
   }
 
   const loadedSrc = loadLastSelectedPluginSrc();

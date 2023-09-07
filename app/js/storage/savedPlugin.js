@@ -22,9 +22,13 @@ function pluginStorageKey(pluginName) {
 /**
  *
  * @param {() => void} callback
+ * @returns {() => void} off() fn to unregister listener
  */
 export function onSavedPluginsMutate(callback) {
   ALL_MUTATION_LISTENERS.add(callback);
+  return () => {
+    ALL_MUTATION_LISTENERS.delete(callback);
+  };
 }
 
 function emitMutation() {
