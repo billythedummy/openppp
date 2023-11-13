@@ -37,24 +37,24 @@ export default defineConfig({
   },
   plugins: [
     VitePWA({
-      includeAssets: [`/favicon.ico`, `/images/logo/apple-touch-icon.png`],
+      includeAssets: [`/favicon.ico`, `/apple-touch-icon.png`],
       manifest: {
-        name: "My Web App",
-        short_name: "mwa",
-        description: "This is a test web app",
+        name: "OpenPPP",
+        short_name: "OpenPPP",
+        description: "The web platform for image processing",
         icons: [
           {
-            src: `/images/logo/logo_512x512.png`,
+            src: `/android-chrome-512x512.png`,
             sizes: "512x512",
             type: "image/png",
           },
           {
-            src: `/images/logo/logo_192x192.png`,
+            src: `/android-chrome-192x192.png`,
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: `/images/logo/logo_192x192.png`,
+            src: `/android-chrome-192x192.png`,
             sizes: "192x192",
             type: "image/png",
             purpose: "any maskable",

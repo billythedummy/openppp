@@ -1,4 +1,6 @@
 {
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   // The 3 most important one:
   // Enable semantic checking of JavaScript files.
   // Existing jsconfig.json or tsconfig.json files override this setting.
