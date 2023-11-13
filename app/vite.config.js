@@ -38,6 +38,7 @@ export default defineConfig({
   plugins: [
     VitePWA({
       includeAssets: [`/favicon.ico`, `/apple-touch-icon.png`],
+      manifestFilename: "site.webmanifest",
       manifest: {
         name: "OpenPPP",
         short_name: "OpenPPP",
